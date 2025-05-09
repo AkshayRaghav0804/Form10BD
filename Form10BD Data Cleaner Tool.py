@@ -57,11 +57,12 @@ def validate_and_correct(row):
         if not is_valid:
             change_note = "Invalid UID Format - Needs Review"
         elif id_code != correct_code:
-            change_note = "Updated ID Code"
+            change_note = "ID Code mismatch"
         elif uid != uid_clean:
             change_note = "Formatted UID"
 
-    row['ID Code'] = correct_code
+    # Do not change the ID Code here, just flag it in the change note
+    row['Change Note'] = change_note
     row['Unique Identification Number'] = uid_clean
 
     return pd.Series([row['ID Code'], row['Unique Identification Number'], change_note])
